@@ -57,12 +57,12 @@ slowlog-log-slower-than {{ redis.get('slowlog-log-slower-than', 10000) }}
 
 slowlog-max-len {{ redis.get('slowlog-max-len', 1024) }}
 
-vm-enabled {{ vm.get('enabled', 'no') }}
-vm-swap-file {{ vm.get('swap-file', '/tmp/redis.swap') }}
-vm-max-memory {{ vm.get('max-memory', 0) }}
-vm-page-size {{ vm.get('page-size', 32) }}
-vm-pages {{ vm.get('pages', 134217728) }}
-vm-max-threads {{ vm.get('max-threads', 4) }}
+#vm-enabled {{ vm.get('enabled', 'no') }}
+#vm-swap-file {{ vm.get('swap-file', '/tmp/redis.swap') }}
+#vm-max-memory {{ vm.get('max-memory', 0) }}
+#vm-page-size {{ vm.get('page-size', 32) }}
+#vm-pages {{ vm.get('pages', 134217728) }}
+#vm-max-threads {{ vm.get('max-threads', 4) }}
 
 ############################### ADVANCED CONFIG ###############################
 
