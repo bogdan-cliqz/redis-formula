@@ -14,7 +14,7 @@ redis-dependencies:
 get-redis:
   file.managed:
     - name: {{ root }}/redis-{{ version }}.tar.gz
-    - source: http://download.redis.io/redis-{{ version }}.tar.gz
+    - source: http://download.redis.io/releases/redis-{{ version }}.tar.gz
     - source_hash: {{ checksum }}
     - require:
       - pkg: redis-dependencies
