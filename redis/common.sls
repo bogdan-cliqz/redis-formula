@@ -12,22 +12,33 @@ redis-dependencies:
 
 ## Get redis
 get-redis:
-  file.managed:
-    - name: {{ root }}/redis-{{ version }}.tar.gz
-    {% if version == 'unstable' %}
-    - source: https://github.com/antirez/redis/tarball/unstable
-    {% else %}
-    - source: http://download.redis.io/releases/redis-{{ version }}.tar.gz
-    - source_hash: {{ checksum }}
-    {% endif %}
+  {% if version == 'unstable' %}
+  git.latest:
+    - name: https://github.com/saltstack/salt.git:
+    - rev: unstable
+    - target: {{ root }}/redis-{{ version }}.tar.gz
+    - force: yes
+    - force_checkout: yes
     - require:
       - pkg: redis-dependencies
+  {% else %}
+  file.managed:
+    - name: {{ root }}/redis-{{ version }}.tar.gz
+    - source: http://download.redis.io/releases/redis-{{ version }}.tar.gz
+    - source_hash: {{ checksum }}
+    - require:
+      - pkg: redis-dependencies
+  {% endif %}
   cmd.wait:
     - cwd: {{ root }}
     - names:
       - tar -zxvf {{ root }}/redis-{{ version }}.tar.gz -C {{ root }}
     - watch:
+    {% if version == 'unstable' %}
+      - 
+    {% else %}
       - file: get-redis
+    {% endif %}
 
 make-redis:
   cmd.wait:
