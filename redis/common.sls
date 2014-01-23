@@ -14,7 +14,7 @@ redis-dependencies:
 get-redis:
   {% if version == 'unstable' %}
   git.latest:
-    - name: https://github.com/saltstack/salt.git:
+    - name: https://github.com/saltstack/salt.git
     - rev: unstable
     - target: {{ root }}/redis-{{ version }}.tar.gz
     - force: yes
