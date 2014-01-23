@@ -47,4 +47,8 @@ make-redis:
       - make
       - make install
     - watch:
-      - cmd: get-redis
+    {% if version == 'unstable' %}
+      - git: get-redis
+    {% else %}
+      - file: get-redis
+    {% endif %}
