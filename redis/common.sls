@@ -1,7 +1,7 @@
-{% set redis = pillar.get('redis', {}) -%}
-{% set version = redis.get('version', 'stable') -%}
-{% set checksum = redis.get('checksum', 'sha1=12755897666792eb9e1a0b7e4589eb1cb8e229d0') -%}
-{% set root = redis.get('root', '/usr/local') -%}
+{% set redis    = pillar.get('redis', {}) %}
+{% set version  = redis.get('version', 'stable') %}
+{% set checksum = redis.get('checksum', 'sha1=12755897666792eb9e1a0b7e4589eb1cb8e229d0') %}
+{% set root     = redis.get('root', '/usr/local') %}
 
 redis-dependencies:
   pkg.installed:

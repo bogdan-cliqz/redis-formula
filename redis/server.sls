@@ -1,10 +1,11 @@
 include:
   - redis.common
 
-{% set redis  = pillar.get('redis', {}) -%}
-{% set home   = redis.get('home', '/var/lib/redis') -%}
-{% set user   = redis.get('user', 'redis') -%}
-{% set group  = redis.get('group', user) -%}
+{% set version  = redis.get('version', 'stable') %}
+{% set redis  = pillar.get('redis', {}) %}
+{% set home   = redis.get('home', '/var/lib/redis') %}
+{% set user   = redis.get('user', 'redis') %}
+{% set group  = redis.get('group', user) %}
 
 redis_group:
   group.present:
@@ -31,7 +32,11 @@ redis-init-script:
         conf: /etc/redis/redis.conf
         user: {{ user }}
     - require:
+    {% if version == 'unstable' %}
+      - git: get-redis
+    {% else %}
       - file: get-redis
+    {% endif %}
 
 redis-old-init-disable:
   cmd:
