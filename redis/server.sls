@@ -1,11 +1,11 @@
 include:
   - redis.common
 
-{% set version  = redis.get('version', 'stable') -%}
-{% set redis  = pillar.get('redis', {}) -%}
-{% set home   = redis.get('home', '/var/lib/redis') -%}
-{% set user   = redis.get('user', 'redis') -%}
-{% set group  = redis.get('group', user) -%}
+{% set redis    = pillar.get('redis', {}) %}
+{% set version  = redis.get('version', 'stable') %}
+{% set home     = redis.get('home', '/var/lib/redis') %}
+{% set user     = redis.get('user', 'redis') %}
+{% set group    = redis.get('group', user) %}
 
 redis_group:
   group.present:
