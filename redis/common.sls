@@ -34,7 +34,11 @@ get-redis:
     - names:
       - tar -zxvf {{ root }}/redis-{{ version }}.tar.gz -C {{ root }}
     - watch:
+    {% if version == 'unstable' %}
+      - git: get-redis
+    {% else %}
       - file: get-redis
+    {% endif %}
 
 make-redis:
   cmd.wait:
