@@ -14,7 +14,7 @@ redis-dependencies:
 get-redis:
   {% if version == 'unstable' %}
   git.latest:
-    - name: https://github.com/saltstack/salt.git
+    - name: https://github.com/antirez/redis.git
     - rev: unstable
     - target: {{ root }}/redis-{{ version }}.tar.gz
     - force: yes
@@ -34,11 +34,7 @@ get-redis:
     - names:
       - tar -zxvf {{ root }}/redis-{{ version }}.tar.gz -C {{ root }}
     - watch:
-    {% if version == 'unstable' %}
-      - 
-    {% else %}
       - file: get-redis
-    {% endif %}
 
 make-redis:
   cmd.wait:
