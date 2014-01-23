@@ -16,7 +16,7 @@ get-redis:
   git.latest:
     - name: https://github.com/antirez/redis.git
     - rev: unstable
-    - target: {{ root }}/redis-{{ version }}.tar.gz
+    - target: {{ root }}/redis-{{ version }}
     - force: yes
     - force_checkout: yes
     - require:
@@ -28,17 +28,13 @@ get-redis:
     - source_hash: {{ checksum }}
     - require:
       - pkg: redis-dependencies
-  {% endif %}
   cmd.wait:
     - cwd: {{ root }}
     - names:
       - tar -zxvf {{ root }}/redis-{{ version }}.tar.gz -C {{ root }}
     - watch:
-    {% if version == 'unstable' %}
-      - git: get-redis
-    {% else %}
       - file: get-redis
-    {% endif %}
+  {% endif %}
 
 make-redis:
   cmd.wait:
