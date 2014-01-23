@@ -14,7 +14,11 @@ redis-dependencies:
 get-redis:
   file.managed:
     - name: {{ root }}/redis-{{ version }}.tar.gz
+    {% if version == 'unstable' %}
+    - source: https://github.com/antirez/redis/tarball/unstable
+    {% else %}
     - source: http://download.redis.io/releases/redis-{{ version }}.tar.gz
+    {% %}
     - source_hash: {{ checksum }}
     - require:
       - pkg: redis-dependencies
